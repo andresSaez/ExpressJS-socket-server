@@ -9,10 +9,12 @@ export const disconnect = ( client: Socket ) => {
 
 }
 
-
-export const mensaje = ( client: Socket ) => {
+// Escuchar mensajes
+export const mensaje = ( client: Socket, io: SocketIO.Server ) => {
 
     client.on('mensaje', ( payload: { de: string, cuerpo: string } ) => {
         console.log('Mensaje recibido:', payload );
+
+        io.emit('mensaje-nuevo', payload );
     });
 }
